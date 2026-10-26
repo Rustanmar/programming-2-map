@@ -1,8 +1,7 @@
 package part03;
 
 import java.util.*;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * This part of the exercise is tested manually through the user interface, not
@@ -48,11 +47,18 @@ public class PostalCodesMain {
             System.out.println(postDist);
         }
         else{
-            postalCodes.entrySet().stream()
+            String result = postalCodes.entrySet().stream()
                 .filter(e -> e.getValue().equalsIgnoreCase(answer))
                 .map(Map.Entry::getKey)
                 .sorted()
-                .forEach(System.out::println);
+                .collect(Collectors.joining(", "));
+
+                if (result.isEmpty()){
+                    System.out.println("Postal codes not found.");
+                }
+                else {
+                    System.out.println("Postal codes: " + result);
+                }
         }
 
         scanner.close();
