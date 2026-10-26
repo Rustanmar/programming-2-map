@@ -1,5 +1,6 @@
 package part03;
 
+import java.util.*;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -41,6 +42,25 @@ public class PostalCodesMain {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Input postal code or district (e.g., 00100 or Helsinki): ");
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
+
+        String postDist = postalCodes.get(answer);
+        if (postDist != null){
+            System.out.println(postDist);
+        }
+        else{
+            List<String> codes = new ArrayList<>();
+
+            for (Map.Entry<String, String> entry : postalCodes.entrySet()){
+                    if (entry.getValue().equalsIgnoreCase(answer)){
+                        codes.add(entry.getKey());
+                    }
+            }
+
+            Collections.sort(codes);
+            for (String code : codes){
+                System.out.println(code);
+            }
+        }
 
         // TODO: Implement your logic here
 
